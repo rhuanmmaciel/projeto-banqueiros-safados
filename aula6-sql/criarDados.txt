@@ -1,0 +1,170 @@
+CREATE  TABLE `diretor` (
+  `idDiretor` INT NOT NULL ,
+  `nome` VARCHAR(45) NULL ,
+  `nacionalidade` VARCHAR(255) NULL,
+  PRIMARY KEY (`idDiretor`));
+
+CREATE  TABLE `ator` (
+  `idAtor` INT NOT NULL ,
+  `nome` VARCHAR(255) NOT NULL ,
+  `sexo` CHAR(1) NULL ,
+  `nasc` DATE NULL ,
+  `falec` DATE NULL ,
+  `pais` VARCHAR(255) NULL,
+  `altura` DECIMAL(3,2) NULL,
+  PRIMARY KEY (`idAtor`));
+  
+
+CREATE  TABLE `filme` (
+  `idFilme` INT NOT NULL ,
+  `idDiretor` INT NOT NULL ,
+  `titulo` VARCHAR(45) NOT NULL ,
+  `ano` INT NOT NULL ,
+  `bilheteria` DOUBLE NOT NULL ,
+  `custo` DOUBLE NOT NULL ,
+  idFilmeAnterior INT,   
+  PRIMARY KEY (`idFilme`) ,
+  CONSTRAINT `fk_filme_diretor1`
+    FOREIGN KEY (`idDiretor` )
+    REFERENCES `diretor` (`idDiretor` ),
+  CONSTRAINT `fk_filme_filme1`
+    FOREIGN KEY (`idFilmeAnterior` )
+    REFERENCES `filme` (`idFilme` ));
+
+
+CREATE  TABLE `elenco` (
+  `idFilme` INT NOT NULL ,
+  `idAtor` INT NOT NULL ,
+  PRIMARY KEY (`idFilme`, `idAtor`) ,
+  CONSTRAINT `fk_elenco_filme`
+    FOREIGN KEY (`idFilme` )
+    REFERENCES `filme` (`idFilme` ),
+  CONSTRAINT `fk_elenco_ator`
+    FOREIGN KEY (`idAtor` )
+    REFERENCES `ator` (`idAtor` ));
+
+
+
+insert into diretor values (1, 'Steven Spielberg', 'Inglaterra');
+insert into diretor values (2, 'Christopher Nolan', 'Inglaterra');
+insert into diretor values (3, 'Martin Scorcese', 'EUA');
+insert into diretor values (4, 'James Cameron', 'Canada');
+insert into diretor values (5, 'Roberto Benigni', 'Italia');
+
+
+
+
+insert into ator values(1, 'Leonardo DiCaprio','M','1974/11/11',null, 'EUA', 1.83); 
+insert into ator values(2, 'Christian Bale','M','1974/01/30',null, 'País de Gales', 1.83);
+insert into ator values(3, 'Tom Hanks','M','1956/07/09',null, 'EUA', 1.83);
+insert into ator values(4, 'Tom Cruise','M','1962/07/03',null, 'EUA', 1.7);
+
+insert into ator values(5, 'Anne Hathaway','F', '1982/11/12',null, 'EUA', 1.73);
+insert into ator values(6, 'Alec Baldwin','M', '1958/04/03',null, 'EUA', 1.83);
+insert into ator values(7, 'Billy Zane','M', '1966/02/24',null, 'EUA', 1.84);
+insert into ator values(8, 'Colin Farrell','M', '1976/05/31',null,'Irlanda', 1.78);
+insert into ator values(9, 'Catherine Zeta-Jones','F', '1969/09/25',null, 'Reino Unido', 1.7);
+insert into ator values(10, 'Cate Blanchett','F',  '1969/05/14',null,  'Australia', null);
+insert into ator values(11, 'Dakota Fanning','F', '1994/02/23',null, 'EUA', 1.63);
+insert into ator values(12, 'Heath Ledger','M', '1979/04/04', '2008/01/22', 'EUA', 1.85);
+insert into ator values(13, 'Gary Oldman','M',  '1958/03/21', null, 'Inglaterra', null);
+insert into ator values(14, 'Joseph Gordon-Levitt','M', '1981/02/17', null, 'EUA', 1.76);
+insert into ator values(15, 'Jack Nicholson','M', '1937/04/22',null, 'EUA', null); 
+insert into ator values(16, 'Jude Law','M','1972/12/29',null, 'Inglaterra', null);
+insert into ator values(17, 'Kate Winslet','F', '1975/10/05', null, 'Inglaterra', 1.69);
+insert into ator values(18, 'Liam Neeson','M', '1952/06/07', null, 'Irlanda do Norte', 1.93);
+insert into ator values(19, 'Matthew McConaughey','M', '1969/11/04',null, 'EUA', 1.82);
+insert into ator values(20, 'Matt Damon','M',  '1970/10/08', null, 'EUA', 1.78);
+insert into ator values(21, 'Michael Caine','M', '1933/03/14', null, 'Inglaterra', 1.88);
+insert into ator values(22, 'Morgan Freeman','M', '1937/06/01',null,  'EUA', 1.88);
+insert into ator values(23, 'Maggie Gyllenhaal','F', '1977/11/16', null, 'EUA', 1.75);
+insert into ator values(24, 'Mark Wahlberg','M', '1971/06/05', null, 'EUA', 1.73);
+insert into ator values(25, 'Tim Robbins','M', '1958/10/16', null,  'EUA', 1.96);
+insert into ator values(26, 'Vera Farmiga','F', '1973/08/06', null, 'EUA', 1.70);
+insert into ator values(27, 'Charlie Sheen','M', '1965/09/03', null, 'EUA', 1.78);
+insert into ator values(28, 'Roberto Benigni','M', '1952/12/26', null, 'Italia', 1.68);
+insert into ator values(29, 'Kathy Bates','F', '1948/06/28', null, 'EUA', null);
+insert into ator values(30, 'Zoë Saldaña','F', '1978/06/19', null, 'EUA', null);
+
+
+
+INSERT INTO filme values (1, 1,'Guerra dos Mundos', 2005,603000000, 132000000, null);
+INSERT INTO filme values (2, 1,'Minority Report', 2002,358000000, 102000000, null);
+INSERT INTO filme values (3, 1,'O Terminal', 2004,219000000, 60000000, null);
+
+INSERT INTO filme values (4, 2, 'Interstelar', 2014,701000000, 165000000, null);
+INSERT INTO filme values (5, 2, 'Batman Begins', 2005,373000000, 150000000, null);
+INSERT INTO filme values (6, 2, 'Batman - O Cavaleiro das Trevas', 2008, 1006000000, 180000000, 5);
+INSERT INTO filme values (7, 2, 'Batman - O Cavaleiro das Trevas Ressurge', 2012, 1081000000, 250000000, 6);
+
+INSERT INTO filme values (8, 3, 'O Lobo de Wall Street', 2013, 406000000, 100000000, null);
+INSERT INTO filme values (9, 3, 'Os Infiltrados', 2006, 104000000, 40000000, null);
+INSERT INTO filme values (10, 3, 'O Aviador', 2004, 213000000, 110000000, null);
+
+
+INSERT INTO filme values (11, 4, 'Titanic', 1997, 2249000000, 200000000, null);
+INSERT INTO filme values (12, 4, 'Avatar', 2009, 2923000000, 237000000, null);
+INSERT INTO filme values (13, 5, 'A Vida é Bela', 1997, 229000000, 20000000, null);
+
+
+
+INSERT INTO elenco values (1,4);
+INSERT INTO elenco values (1,11);
+INSERT INTO elenco values (1,25);
+
+INSERT INTO elenco values (2,4);
+INSERT INTO elenco values (2,8);
+
+INSERT INTO elenco values (3,3);
+INSERT INTO elenco values (3,9);
+INSERT INTO elenco values (3,30);
+
+INSERT INTO elenco values (4,5);
+INSERT INTO elenco values (4,19);
+INSERT INTO elenco values (4,20);
+INSERT INTO elenco values (4,21);
+
+INSERT INTO elenco values (5,2);
+INSERT INTO elenco values (5,13);
+INSERT INTO elenco values (5,18);
+INSERT INTO elenco values (5,21);
+INSERT INTO elenco values (5,22);
+
+INSERT INTO elenco values (6,2);
+INSERT INTO elenco values (6,12);
+INSERT INTO elenco values (6,13);
+INSERT INTO elenco values (6,21);
+INSERT INTO elenco values (6,22);
+INSERT INTO elenco values (6,23);
+
+INSERT INTO elenco values (7,2);
+INSERT INTO elenco values (7,5);
+INSERT INTO elenco values (7,13);
+INSERT INTO elenco values (7,14);
+INSERT INTO elenco values (7,18);
+INSERT INTO elenco values (7,21);
+INSERT INTO elenco values (7,22);
+
+
+INSERT INTO elenco values (8,1);
+INSERT INTO elenco values (8,19);
+
+INSERT INTO elenco values (9,1);
+INSERT INTO elenco values (9,15);
+INSERT INTO elenco values (9,20);
+INSERT INTO elenco values (9,24);
+INSERT INTO elenco values (9,26);
+
+
+INSERT INTO elenco values (10,1);
+INSERT INTO elenco values (10,6);
+INSERT INTO elenco values (10,10);
+INSERT INTO elenco values (10,16);
+
+
+INSERT INTO elenco values (11,1);
+INSERT INTO elenco values (11,7);
+INSERT INTO elenco values (11,17);
+INSERT INTO elenco values (11,29);
+
+INSERT INTO elenco values (13,28);
